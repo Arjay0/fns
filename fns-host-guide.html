@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FNS Host Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap');
+
+  :root {
+    --green: #2d6a4f;
+    --green-light: #52b788;
+    --yellow: #f4c430;
+    --red: #c1121f;
+    --cream: #fefae0;
+    --brown: #7c5e34;
+    --bg: #f8f4e8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg);
+    color: #2b2b2b;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 32px 24px;
+    background: var(--green);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: "⚔️🍎🎲";
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+    letter-spacing: 8px;
+  }
+
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 52px;
+    color: var(--yellow);
+    letter-spacing: 3px;
+    line-height: 1;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+  }
+
+  header .subtitle {
+    color: #b7e4c7;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--green);
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+
+  section {
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    color: var(--green);
+    border-left: 6px solid var(--green-light);
+    padding-left: 14px;
+    margin-bottom: 16px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-bottom: 16px;
+  }
+
+  .supply-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .supply-item {
+    background: var(--cream);
+    border: 2px solid #e0d9c0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .supply-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brown);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .supply-item.star {
+    border-color: var(--green-light);
+    background: #d8f3dc;
+  }
+
+  .snack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .snack {
+    background: var(--cream);
+    border: 2px solid #e0d9c0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .snack.hit { border-color: var(--yellow); background: #fff9e0; }
+  .snack.skip { border-color: #ddd; color: #aaa; text-decoration: line-through; }
+
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background: var(--green-light);
+    border-radius: 3px;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid var(--green-light);
+  }
+
+  .tl-time {
+    font-family: 'Fredoka One', cursive;
+    color: var(--green);
+    font-size: 16px;
+  }
+
+  .tl-desc {
+    font-size: 14px;
+    color: #444;
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+
+  .tip-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tip-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .tip-list li::before {
+    position: absolute;
+    left: 0;
+    top: 10px;
+  }
+
+  .tip-list li.star::before { content: "⭐"; }
+  .tip-list li.warn::before { content: "⚠️"; }
+  .tip-list li.idea::before { content: "💡"; }
+
+  .tip-list li:last-child { border-bottom: none; }
+
+  .rating-bar {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .rating-bar span {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--green);
+    display: inline-block;
+  }
+
+  .rating-bar span.empty {
+    background: #ddd;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+  }
+
+  .highlight-box {
+    background: #d8f3dc;
+    border: 2px solid var(--green-light);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .supply-grid { grid-template-columns: 1fr; }
+    .snack-grid { grid-template-columns: 1fr 1fr; }
+    header h1 { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>FNS</h1>
+  <div class="subtitle">Fruit &amp; Swords · Host Guide</div>
+  <div class="badge">Based on a successful first session ✓</div>
+</header>
+
+<!-- At a Glance -->
+<section>
+  <h2>At a Glance</h2>
+  <div class="card">
+    <ul class="tip-list">
+      <li class="star">FNS is a tabletop RPG created by kids, for kids. Think D&amp;D, but your own way.</li>
+      <li class="star">Group size: <strong>5–7 players</strong> worked great.</li>
+      <li class="star">Session length: <strong>~2.5–3 hours</strong> total (gaming + breaks + activity).</li>
+      <li class="idea">Each player brings their own <strong>character binder and dice set</strong>. Remind them ahead of time!</li>
+      <li class="warn">At least one parent/adult should be nearby during active play.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Supplies -->
+<section>
+  <h2>What You'll Need</h2>
+  <div class="supply-grid">
+    <div class="supply-item star">
+      <span class="label">⭐ MVP Item</span>
+      Something for hands —<br>air clay worked great for us
+    </div>
+    <div class="supply-item star">
+      <span class="label">⭐ For Break Activity</span>
+      Whatever your crew has —<br>we used Nerf guns
+    </div>
+    <div class="supply-item">
+      <span class="label">Table Setup</span>
+      Enough table space for the group<br>+ a tablecloth
+    </div>
+    <div class="supply-item">
+      <span class="label">Crafting (if using clay)</span>
+      Paper plates (work surfaces)<br>Popsicle sticks &amp; toothpicks
+    </div>
+    <div class="supply-item">
+      <span class="label">Nice to Have</span>
+      Fidget toys / spinners<br>for downtime
+    </div>
+    <div class="supply-item">
+      <span class="label">Drinks</span>
+      Closed water bottles only<br>(spills + clay = bad)
+    </div>
+  </div>
+</section>
+
+<!-- Snacks -->
+<section>
+  <h2>Snacks</h2>
+  <div class="highlight-box">Keep it light and grabbable. Kids snack between turns, not in big sittings.</div>
+  <div class="snack-grid">
+    <div class="snack hit">Hello Panda<br>🐼 Big hit</div>
+    <div class="snack hit">Senbei crackers<br>🍘 Big hit</div>
+    <div class="snack hit">Gummies<br>🐇 Big hit</div>
+    <div class="snack hit">Oreos / chips<br>🍪 Popular</div>
+    <div class="snack">Beef sticks<br>fine</div>
+    <div class="snack skip">Z-bars<br>barely touched</div>
+    <div class="snack skip">Carrots<br>nobody's hero</div>
+    <div class="snack skip">Apples<br>maybe, maybe not</div>
+  </div>
+</section>
+
+<!-- Setup -->
+<section>
+  <h2>Before They Arrive</h2>
+  <div class="card">
+    <ul class="tip-list">
+      <li class="star">Put a tablecloth down. Clay (or whatever hand activity you pick) gets everywhere.</li>
+      <li class="star">Set a paper plate at each seat as a personal work surface.</li>
+      <li class="idea">Set out snacks in bowls in the middle of the table before they walk in.</li>
+      <li class="warn">Remind guests to bring their <strong>character binder and dice set</strong> when you confirm attendance. One player forgot his binder and had to go get it.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section>
+  <h2>Session Flow</h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">Arrival (0:00–0:30)</div>
+        <div class="tl-desc">Kids trickle in. Give them something to do with their hands while they wait for everyone to show up. No awkward standing around, and it warms them up for the session.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">Round 1 (0:30–1:00)</div>
+        <div class="tl-desc">Start FNS once everyone's settled. Expect a little distraction from the hand activity at first — that's fine. They'll find their rhythm. Each round = ~30 min, ~4–5 turns per player.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">Break (1:00–1:05)</div>
+        <div class="tl-desc">Short 5-minute break. Bathroom, snacks, talk. Keep it brief so momentum doesn't die.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">Round 2 (1:05–1:35)</div>
+        <div class="tl-desc">Back to FNS for another 30 minutes. By now the group is in a groove. Another ~4–5 turns each.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">Activity Break (1:35–2:05)</div>
+        <div class="tl-desc">Natural transition point — everyone stands up and does something active. Plan this as a dedicated block ahead of time (and let the kids know it's coming). Leaving it open-ended creates debate about when to switch. What the activity is is up to you and what you have available.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">Wind Down (2:05–2:30)</div>
+        <div class="tl-desc">One more short activity burst or back to FNS, then cool down. Kids help clean up and pack up binders. Air clay cleanup is pretty easy — mostly big chunks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What Worked -->
+<section>
+  <h2>What Worked Really Well</h2>
+  <div class="card">
+    <ul class="tip-list">
+      <li class="star"><strong>Giving kids something to do with their hands between turns was huge.</strong> It kept the energy up without chaos. We used air clay — your setup may vary, but something in this category is worth planning for.</li>
+      <li class="star"><strong>Toothpicks and popsicle sticks</strong> were used as sculpting tools. Fun bonus if you go the clay route.</li>
+      <li class="star"><strong>Character creation via clay</strong> was a natural fit — most kids made their FNS character out of clay during the session.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Watch Outs -->
+<section>
+  <h2>Things to Watch Out For</h2>
+  <div class="card">
+    <ul class="tip-list">
+      <li class="warn"><strong>No open cups of water.</strong> One spilled and made a mess with the clay. Closed bottles only.</li>
+      <li class="warn"><strong>Dice rolling area can get crowded.</strong> Consider a small tray in the center of the table as a designated roll spot.</li>
+      <li class="idea"><strong>Mixed clay colors actually look cool.</strong> Instead of tossing combined scraps, bag them up — the clay can be reused and the blended colors are a bonus.</li>
+      <li class="idea"><strong>Plan breaks ahead of time</strong> and tell the kids the structure at the start. "After round 2 we'll take a break and do something active" goes a long way toward keeping transitions smooth.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Next Time -->
+<section>
+  <h2>Ideas for Next Time</h2>
+  <div class="card">
+    <ul class="tip-list">
+      <li class="idea">Add fidget toys alongside (or instead of) clay for downtime.</li>
+      <li class="idea">Remind guests to bring their binder <em>and dice</em> in the day-before message.</li>
+      <li class="idea">Chips are a safe snack bet.</li>
+      <li class="idea">A dedicated activity hour (vs. squeezing it between rounds) might let kids go deeper into both FNS and the break activity.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Rating -->
+<section>
+  <h2>How It Went Overall</h2>
+  <div class="card">
+    <p style="font-size:14px; margin-bottom:10px;">Rated by the game creator himself:</p>
+    <div class="rating-bar">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span class="empty"></span>
+    </div>
+    <p style="margin-top:10px; font-size:14px; color:#555;">9 out of 10. (He wanted to say 11.)</p>
+  </div>
+</section>
+
+<div class="footer">
+  FNS was created by Reza &mdash; a kid-made game, for kids who like fruit, swords, and rolling dice.
+</div>
+
+</body>
+</html>
